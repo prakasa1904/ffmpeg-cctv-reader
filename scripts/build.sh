@@ -5,4 +5,6 @@ if [ ! -d "./stream" ]; then
     mkdir ./stream
 fi
 
+cp public/index.html ./stream
+
 go build -o ffmpeg-cctv-reader

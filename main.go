@@ -21,10 +21,6 @@ func main() {
 	ffmpegCmd := fmt.Sprintf("ffmpeg -i rtsp://%s:%s@%s:%s/live/ch00_0 -c:v copy -c:a copy -hls_time 2 -hls_list_size 5 -hls_flags delete_segments -start_number 1 ./stream/output.m3u8", user, pass, host, port)
 	args := strings.Fields(ffmpegCmd)
 
-	// Print the command for debugging purposes
-	fmt.Println("FFmpeg command:", strings.Join(args, " "))
-	os.Exit(0)
-
 	cmd := exec.Command(args[0], args[1:]...)
 
 	// Connect the command's stdout to the current process's stdout

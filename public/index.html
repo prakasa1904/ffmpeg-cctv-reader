@@ -4,54 +4,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style type="text/css">
-      .video-container {
-        width: 100%; /* Or a specific max-width if desired */
-        /* Other styling for the container if needed */
-      }
-
-      .video-container video {
-        width: 100%;
-        height: auto; /* This maintains the aspect ratio */
-        display: block; /* Removes extra space below the video */
-      }
-    </style>
     <title>Rumah Prakasa</title>
-    <style></style>
   </head>
   <body>
-    <div class="video-container">
-      <video id="myvideo" controls autoplay></video>
-    </div>
-    <script
-      defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.6.13/hls.min.js"
-    ></script>
-    <script>
-      window.addEventListener("load", () => {
-        if (Hls.isSupported()) {
-          const hls = new Hls({
-            xhrSetup: function (xhr, url) {
-              let user = ""; // fill if needed
-              let pass = ""; // fill if needed
-              let token = ""; // fil if needed
-
-              if (user !== "") {
-                const credentials = btoa(`${user}:${pass}`);
-                xhr.setRequestHeader("Authorization", `Basic ${credentials}`);
-              } else if (token !== "") {
-                xhr.setRequestHeader("Authorization", `Bearer ${token}`);
-              }
-            },
-          });
-
-          hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-            hls.loadSource("/output.m3u8");
-          });
-
-          hls.attachMedia(document.getElementById("myvideo"));
-        }
-      });
-    </script>
+    <iframe src="https://nicky.beta.devetek.app/cctv" scrolling="no" style="width: 100vw; height: 100vh; border: none;"></iframe>
   </body>
 </html>

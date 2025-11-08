@@ -1,10 +1,99 @@
 #!/bin/bash
 
-# check if folder ./stream exists, if not, create it
-if [ ! -d "./stream" ]; then
-    mkdir ./stream
+set -e
+
+if [ -z "${BIN_DIR}" ]; then
+	BIN_DIR=$(pwd)
 fi
 
-cp public/index.html ./stream
+THE_ARCH_VER="v1.15.3"
+THE_ARCH_BIN=""
 
+OS=$(uname -s)
+ARCH=$(uname -m)
+DEST=${BIN_DIR}/mediamtx-${THE_ARCH_VER}.tar.gz
+
+if type "tput" >/dev/null 2>&1; then
+	bold=$(tput bold || true)
+	italic=$(tput sitm || true)
+	normal=$(tput sgr0 || true)
+fi
+
+case ${OS} in
+Linux*)
+	case ${ARCH} in
+	aarch64)
+		THE_ARCH_BIN="mediamtx_${THE_ARCH_VER}_linux_arm64.tar.gz"
+		;;
+	x86_64)
+		THE_ARCH_BIN="mediamtx_${THE_ARCH_VER}_linux_amd64.tar.gz"
+		;;
+	*)
+		THE_ARCH_BIN=""
+		;;
+	esac
+	;;
+Darwin*)
+	case ${ARCH} in
+	arm64)
+		THE_ARCH_BIN="mediamtx_${THE_ARCH_VER}_darwin_arm64.tar.gz"
+		;;
+	*)
+		THE_ARCH_BIN="mediamtx_${THE_ARCH_VER}_darwin_amd64.tar.gz"
+		;;
+	esac
+	;;
+Windows | MINGW64_NT*)
+	echo "❗ Use WSL to run Marijan on Windows: https://learn.microsoft.com/windows/wsl/"
+	exit 1
+	;;
+*)
+	THE_ARCH_BIN=""
+	;;
+esac
+
+if [ -z "${THE_ARCH_BIN}" ]; then
+	echo "❗ Mediamtx is not supported on ${OS} and ${ARCH}"
+	exit 1
+fi
+
+SUDO=""
+
+echo "📦 Downloading ${bold}Mediamtx${normal} for ${OS} (${ARCH}):"
+
+# check if $DEST is writable and suppress an error message
+touch "${DEST}" 2>/dev/null
+
+# we need sudo powers to write to DEST
+if [ $? -eq 1 ]; then
+	echo "❗ You do not have permission to write to ${italic}${DEST}${normal}, enter your password to grant sudo powers"
+	SUDO="sudo"
+fi
+
+if type "curl" >/dev/null 2>&1; then
+	curl -L --progress-bar "https://github.com/bluenviron/mediamtx/releases/download/${THE_ARCH_VER}/${THE_ARCH_BIN}" -o "${DEST}"
+elif type "wget" >/dev/null 2>&1; then
+	${SUDO} wget "https://github.com/bluenviron/mediamtx/releases/download/${THE_ARCH_VER}/${THE_ARCH_BIN}" -O "${DEST}"
+else
+	echo "❗ Please install ${italic}curl${normal} or ${italic}wget${normal} to download Mediamtx"
+	exit 1
+fi
+
+echo
+echo "${bold}Delete unused files:${normal}"
+tar -xzvf "${DEST}"
+rm "${DEST}"
+rm mediamtx.yml
+rm LICENSE
+mv mediamtx "${BIN_DIR}/publisher"
+
+echo
+echo "🥳 Mediamtx downloaded successfully to ${italic}${DEST}${normal}"
+echo "🔧 Move the binary to ${italic}/usr/local/bin/${normal} or another directory in your ${italic}PATH${normal} to use it globally:"
+echo "   ${bold}sudo mv ${DEST} /usr/local/bin/${normal}"
+echo
+echo "⭐ If you like Mediamtx, please give it a star on GitHub: ${italic}https://github.com/bluenviron/mediamtx${normal}"
+
+
+echo "🔧 Build the agent....!"
 go build -o ffmpeg-cctv-reader

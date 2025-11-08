@@ -3,7 +3,6 @@ package command
 import (
 	"context"
 	"io"
-	"log"
 	"os/exec"
 	"strings"
 )
@@ -25,10 +24,6 @@ func NewCommand(opts ...CommandOpt) *Command {
 
 	// set command to cmd
 	args := strings.Fields(c.command)
-
-	log.Println("argsargsargs")
-	log.Println(args)
-	log.Println("argsargsargs")
 	c.cmd = exec.CommandContext(c.ctx, c.name, args...)
 
 	return c

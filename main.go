@@ -33,8 +33,8 @@ func runningMediaMTX(ctx context.Context, mediaMTXCmd string) error {
 
 func main() {
 	// Create a context with a timeout of 5 seconds.
-	ctxFFMPEG, cancelFMPEG := context.WithTimeout(context.Background(), 5*time.Second)
-	ctxMediaMTX, cancelMediaMTX := context.WithTimeout(context.Background(), 5*time.Second)
+	ctxFFMPEG, cancelFMPEG := context.WithCancel(context.Background())
+	ctxMediaMTX, cancelMediaMTX := context.WithCancel(context.Background())
 
 	cctvCamera := os.Getenv("CCTV_CAMERA")
 	rtspServer := os.Getenv("RTSP_SERVER")

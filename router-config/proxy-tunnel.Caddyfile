@@ -1,0 +1,30 @@
+http:// {
+	# header control
+	header -X-Powered-By
+	header Server "dPanel"
+
+	handle /cctv {
+                reverse_proxy localhost:8889
+        }
+
+	handle /cctv/* {
+                reverse_proxy localhost:8889
+        }
+
+	handle {
+		root * /home/prakasa1904/apps/cctv-reader-with-ffmpeg/public
+		file_server
+	}
+
+	handle_errors {
+		respond "{err.status_code} {err.status_text}"
+	}
+
+    log {
+        output file /var/log/caddy/tunnel-proxy.access.log {
+            roll_size 100mb
+            roll_keep 3
+            roll_keep_for 720h
+        }
+    }
+}

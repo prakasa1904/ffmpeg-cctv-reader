@@ -2,3 +2,4 @@ scripts/dev.sh
 ffmpeg-cctv-reader
 stream/
 publisher/mediamtx
+cctv-dashboard

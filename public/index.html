@@ -38,14 +38,6 @@
           <p class="text-sm text-slate-500">Browse and manage camera feeds</p>
         </div>
         <div class="flex gap-3 items-center">
-          <div class="relative">
-            <input
-              id="search"
-              type="search"
-              placeholder="Search by name or location..."
-              class="w-72 rounded-md border border-slate-200 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
-            />
-          </div>
           <select
             id="filterStatus"
             class="rounded-md border border-slate-200 px-3 py-2"
@@ -206,7 +198,6 @@
 
       const grid = document.getElementById("grid");
       const template = document.getElementById("cardTemplate");
-      const search = document.getElementById("search");
       const filterStatus = document.getElementById("filterStatus");
       const prev = document.getElementById("prev");
       const next = document.getElementById("next");
@@ -259,24 +250,17 @@
       }
 
       function applyFilters() {
-        const q = search.value.trim().toLowerCase();
         const status = filterStatus.value;
         filtered = cameras.filter((c) => {
-          const matchQ =
-            !q ||
-            c.name.toLowerCase().includes(q) ||
-            c.location.toLowerCase().includes(q);
           const matchStatus = status === "all" || c.status === status;
-          return matchQ && matchStatus;
+          return matchStatus;
         });
         page = 1;
         render();
       }
 
-      search.addEventListener("input", debounce(applyFilters, 250));
       filterStatus.addEventListener("change", applyFilters);
       clearBtn.addEventListener("click", () => {
-        search.value = "";
         filterStatus.value = "all";
         applyFilters();
       });

@@ -411,11 +411,11 @@ webrtcICEServers2: []
   # password: ''
   # clientOnly: false
 # Time to wait for the WebRTC handshake to complete.
-webrtcHandshakeTimeout: 10s
+webrtcHandshakeTimeout: 50s
 # Maximum time to gather video tracks.
-webrtcTrackGatherTimeout: 2s
+webrtcTrackGatherTimeout: 10s
 # The maximum time to gather STUN candidates.
-webrtcSTUNGatherTimeout: 5s
+webrtcSTUNGatherTimeout: 25s
 
 ###############################################
 # Global settings -> SRT server

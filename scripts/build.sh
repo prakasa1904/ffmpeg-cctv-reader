@@ -96,4 +96,4 @@ echo "⭐ If you like Mediamtx, please give it a star on GitHub: ${italic}https:
 
 
 echo "🔧 Build the agent....!"
-go build -o ffmpeg-cctv-reader
+go build -o ffmpeg-cctv-reader main.go

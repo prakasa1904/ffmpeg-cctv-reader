@@ -10,7 +10,7 @@ func main() {
 	// set app port from env port
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = ":8080"
+		port = "8080"
 	}
 
 	// Create a file server to serve files from the "public" directory
@@ -30,7 +30,7 @@ func main() {
 	})
 
 	log.Printf("Server starting on %s", port)
-	err := http.ListenAndServe(port, nil)
+	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		log.Fatal(err)
 	}

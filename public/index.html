@@ -102,8 +102,8 @@
               <p class="text-sm text-slate-500">Status</p>
               <p id="modalStatus" class="font-medium">Online</p>
             </div>
-            <div>
-              <p class="text-sm text-slate-500">Dilihat</p>
+            <div class="text-end">
+              <p class="text-sm text-slate-500">Terakhir dilihat</p>
               <p id="modalLastSeen" class="font-medium">—</p>
             </div>
           </div>
@@ -196,7 +196,7 @@
 
       function formatDate(iso) {
         const options = {
-          weekday: "short",
+          weekday: "long",
           year: "numeric",
           month: "short",
           day: "numeric",

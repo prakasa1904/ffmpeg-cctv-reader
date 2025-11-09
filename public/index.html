@@ -57,7 +57,10 @@
 
       <!-- Grid container -->
       <main>
-        <div id="grid" class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"></div>
+        <div
+          id="grid"
+          class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        ></div>
 
         <!-- Pagination controls -->
         <div class="mt-6 flex items-center justify-between">
@@ -100,20 +103,9 @@
               <p id="modalStatus" class="font-medium">Online</p>
             </div>
             <div>
-              <p class="text-sm text-slate-500">Last seen</p>
+              <p class="text-sm text-slate-500">Dilihat</p>
               <p id="modalLastSeen" class="font-medium">—</p>
             </div>
-          </div>
-          <div class="mt-4 flex gap-2">
-            <button
-              id="viewBtn"
-              class="px-3 py-2 bg-indigo-600 text-white rounded-md"
-            >
-              Open Live
-            </button>
-            <button id="recordBtn" class="px-3 py-2 bg-white border rounded-md">
-              View Recordings
-            </button>
           </div>
         </div>
       </div>
@@ -181,9 +173,7 @@
         return {
           id: "cam-" + (i + 1),
           name: "Camera " + (i + 1),
-          location: [
-            "Room",
-          ][i % 6],
+          location: ["Room"][i % 6],
           status: s,
           lastSeen: new Date(
             Date.now() - Math.floor(Math.random() * 1000 * 60 * 60 * 24 * 7)
@@ -205,8 +195,15 @@
       const clearBtn = document.getElementById("clearBtn");
 
       function formatDate(iso) {
+        const options = {
+          weekday: "short",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          timeZone: "Asia/Jakarta",
+        };
         const d = new Date(iso);
-        return d.toLocaleString();
+        return d.toLocaleString("id-ID", options);
       }
 
       function render() {

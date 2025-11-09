@@ -8,13 +8,13 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/prakasa1904/ffmpeg-cctv-reader/command"
+	"github.com/prakasa1904/ffmpeg-cctv-reader/internal/command"
 )
 
 func runningMediaMTX(ctx context.Context, mediaMTXCmd string) error {
 	command := command.NewCommand(
 		command.WithContext(ctx),
-		command.WithName("./publisher/mediamtx"),
+		command.WithName("./bin/cctv-mediamtx"),
 		command.WithCommand(mediaMTXCmd),
 	).SetStdout(os.Stdout).SetStderr(os.Stderr).SetEnv(os.Environ())
 
@@ -23,7 +23,7 @@ func runningMediaMTX(ctx context.Context, mediaMTXCmd string) error {
 
 func main() {
 	ctxMediaMTX, cancelMediaMTX := context.WithCancel(context.Background())
-	mediaMTXArgs := "publisher/mediamtx.yml"
+	mediaMTXArgs := "files/config/mediamtx.yml"
 
 	done := make(chan os.Signal, 1)
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)

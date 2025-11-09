@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/prakasa1904/ffmpeg-cctv-reader/command"
+	"github.com/prakasa1904/ffmpeg-cctv-reader/internal/command"
 )
 
 func runningFFMPEG(ctx context.Context, ffmpegCmd string) error {

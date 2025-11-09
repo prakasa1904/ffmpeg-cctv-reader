@@ -14,15 +14,15 @@ func main() {
 	}
 
 	// Create a file server to serve files from the "public" directory
-	fs := http.FileServer(http.Dir("public"))
+	fs := http.FileServer(http.Dir("files/public"))
 
 	// Handle requests to /public/ by stripping the prefix and serving files
-	http.Handle("/public/", http.StripPrefix("/public/", fs))
+	http.Handle("/files/public/", http.StripPrefix("/public/", fs))
 
 	// Optionally, serve an index.html file at the root
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/" {
-			http.ServeFile(w, r, "public/index.html")
+			http.ServeFile(w, r, "files/public/index.html")
 			return
 		}
 		// If not the root, let the static file server handle it (if applicable)

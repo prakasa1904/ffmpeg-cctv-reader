@@ -1,6 +1,1 @@
-stream/
-scripts/dev.sh
-ffmpeg-cctv-reader
-ffmpeg-forwarder
-publisher/mediamtx
-cctv-dashboard
+bin/cctv*

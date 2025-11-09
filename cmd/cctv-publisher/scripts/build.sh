@@ -85,7 +85,7 @@ tar -xzvf "${DEST}"
 rm "${DEST}"
 rm mediamtx.yml
 rm LICENSE
-mv mediamtx "${BIN_DIR}/publisher"
+mv mediamtx "${BIN_DIR}/bin/cctv-mediamtx"
 
 echo
 echo "🥳 Mediamtx downloaded successfully to ${italic}${DEST}${normal}"
@@ -96,4 +96,4 @@ echo "⭐ If you like Mediamtx, please give it a star on GitHub: ${italic}https:
 
 
 echo "🔧 Build the agent....!"
-go build -o ffmpeg-cctv-reader main.go
+go build -o ${BIN_DIR}/bin/cctv-publisher cmd/cctv-publisher/main.go

@@ -34,8 +34,7 @@
     <div class="max-w-7xl mx-auto p-6">
       <header class="flex items-center justify-between mb-6">
         <div>
-          <h1 class="text-2xl font-semibold">CCTV Cameras</h1>
-          <p class="text-sm text-slate-500">Browse and manage camera feeds</p>
+          <h1 class="text-xl font-semibold">CCTV Manager</h1>
         </div>
         <div class="flex gap-3 items-center">
           <select
@@ -167,11 +166,11 @@
 
     <script>
       // Sample data - replace with server data or API
-      const cameras = Array.from({ length: 1 }).map((_, i) => {
+      const cameras = Array.from({ length: 2 }).map((_, i) => {
         const statuses = ["online", "offline"];
         const s = statuses[0];
         return {
-          id: "cam-" + (i + 1),
+          id: i + 1,
           name: "Camera " + (i + 1),
           location: ["Room"][i % 6],
           status: s,
@@ -291,7 +290,7 @@
         modalLastSeen.textContent = formatDate(cam.lastSeen);
         // simple placeholder thumbnail
         modalThumb.innerHTML = `<div class='w-full h-40 flex items-center justify-center text-white'>
-            <iframe src="https://nicky.beta.devetek.app/cctv/" scrolling="no" style="width: 100vw; height: 100vh; border: none;"></iframe>
+            <iframe src="https://nicky.beta.devetek.app/cctv_${cam.id}/" scrolling="no" style="width: 100vw; height: 100vh; border: none;"></iframe>
         </div>`;
         modal.classList.remove("hidden");
         modal.classList.add("flex");

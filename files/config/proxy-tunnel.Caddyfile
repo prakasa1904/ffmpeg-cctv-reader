@@ -3,17 +3,8 @@ http:// {
 	header -X-Powered-By
 	header Server "dPanel"
 
-	handle /cctv {
-                reverse_proxy localhost:8889
-        }
-
-	handle /cctv/* {
-                reverse_proxy localhost:8889
-        }
-
 	handle {
-		root * /home/prakasa1904/apps/cctv-reader-with-ffmpeg/public
-		file_server
+		reverse_proxy localhost:8889
 	}
 
 	handle_errors {

@@ -16,7 +16,7 @@ func runningFFMPEG(ctx context.Context, ffmpegCmd string) error {
 		command.WithContext(ctx),
 		command.WithName("ffmpeg"),
 		command.WithCommand(ffmpegCmd),
-	).SetStdout(os.Stdout).SetStderr(os.Stderr).SetEnv(os.Environ())
+	).SetStderr(os.Stderr).SetEnv(os.Environ())
 
 	return command.Run()
 }

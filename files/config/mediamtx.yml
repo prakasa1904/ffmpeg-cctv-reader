@@ -7,7 +7,7 @@
 # Global settings -> General
 
 # Verbosity of the program; available values are "error", "warn", "info", "debug".
-logLevel: info
+logLevel: error
 # Destinations of log messages; available values are "stdout", "file" and "syslog".
 logDestinations: [stdout]
 # If "file" is in logDestinations, this is the file which will receive the logs.
@@ -411,11 +411,11 @@ webrtcICEServers2:
   # password: ''
   # clientOnly: false
 # Time to wait for the WebRTC handshake to complete.
-webrtcHandshakeTimeout: 50s
+webrtcHandshakeTimeout: 10s
 # Maximum time to gather video tracks.
-webrtcTrackGatherTimeout: 10s
+webrtcTrackGatherTimeout: 2s
 # The maximum time to gather STUN candidates.
-webrtcSTUNGatherTimeout: 25s
+webrtcSTUNGatherTimeout: 5s
 
 ###############################################
 # Global settings -> SRT server
